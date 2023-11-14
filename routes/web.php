@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // 127.0.0.1:8000/taul ==> <h1> SAYA TAUL</h1>
-Route::get('/taul', function () {
-    return "<h1>SAYA TAUL</h1>";
+Route::get('/', function () {
+    return view('welcome');//Diperbarui
 });
+
+
