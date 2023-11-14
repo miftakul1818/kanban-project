@@ -1,26 +1,8 @@
-<!DOCTYPE html>
+@extends('layouts.master')
 
-<html lang="en">
+@section('pageTitle', $pageTitle)
 
-
-<head>
-
-<meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-  <link rel="stylesheet" href="{{ asset('style.css') }}">
-
-  <title>TaskList</title>
-
-</head>
-
-
-<body>
+@section('main')
 
   <div class="task-list-container">
 
@@ -39,32 +21,60 @@
 
     </div>
 
+    @foreach ($tasks as $index => $task)
 
-    <div class="table-body">
+      <div class="table-body">
 
-      <div class="table-body-task-name">
+        <div class="table-body-task-name">
 
-        <span class="material-icons" >
+          <span class="material-icons @if ($task->status == 'completed') check-icon-completed @else check-icon @endif" >
 
-          check_circle
+            check_circle
 
-        </span>
+          </span>
 
-        First Task
+          {{ $task->name }}
 
-      </div>
+        </div>
 
-      <div class="table-body-detail">This is First Task</div>
+        <div class="table-body-detail"> {{ $task->detail }} </div>
 
-      <div class="table-body-due-date">2023-07-19</div>
+        <div class="table-body-due-date"> {{ $task->due_date }} </div>
 
-      <div class="table-body-progress">In Progress</div>
+        <div class="table-body-progress">
 
-    </div>
+          @switch($task->status)
+
+            @case('in_progress')
+
+              In Progress
+
+              @break
+
+            @case('in_review')
+
+              Waiting/In Review
+
+              @break
+
+            @case('completed')
+
+              Completed
+
+              @break
+
+            @default
+
+              Not Started
+
+          @endswitch
+
+        </div>
+
+        </div>
+
+    @endforeach
 
   </div>
 
-</body>
-
-
-</html>
+  @endsection

@@ -15,14 +15,9 @@ use App\Http\Controllers\TaskController; // Ditambahkan
 */
 // 127.0.0.1:8000/taul ==> <h1> SAYA TAUL</h1>
 Route::get('/', function () {
-    return view('welcome');//Diperbarui
-});
 
-Route::get('/', function () {
+    return view('home', ['pageTitle' => 'Home']);
 
-    return view('welcome');
+})->name('home'); // name ditambahkan
 
-});
-
-
-Route::get('/tasks/', [TaskController::class, 'index']); // Ditambahkan
+Route::get('/tasks/', [TaskController::class, 'index'])->name('tasks.index'); // name ditambahkan
