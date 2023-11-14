@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController; // Ditambahkan
 
@@ -15,9 +16,13 @@ use App\Http\Controllers\TaskController; // Ditambahkan
 */
 // 127.0.0.1:8000/taul ==> <h1> SAYA TAUL</h1>
 Route::get('/', function () {
+    return view('welcome');//Diperbarui
+})->name('home');
 
-    return view('home', ['pageTitle' => 'Home']);
-
-})->name('home'); // name ditambahkan
-
-Route::get('/tasks/', [TaskController::class, 'index'])->name('tasks.index'); // name ditambahkan
+Route::prefix('tasks')
+->name('tasks.')
+->controller(TaskController::class)
+->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('{id}/edit', 'edit')->name('edit');
+});

@@ -126,5 +126,22 @@ class TaskController extends Controller
     ]);
 
 }
+    public function edit($id)
+
+{
+
+    $pageTitle = 'Edit List'; // Ditambahkan
+
+    $task = $this->tasks[$id - 1];
+
+    return view('tasks.edit', [
+
+        'pageTitle' => $pageTitle,
+
+        'task' => $task,
+
+    ]);
+
+}
 
 }
